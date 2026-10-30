@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joshua Spitz – Insect Ecology</title>
+<meta name="description" content="Joshua Spitz, insect ecologist: how environmental change shapes insect communities and their functions – taxonomy, traits and trophic interactions. Research and publications.">
+<meta name="theme-color" content="#d6c6a4">
+<!--
+  HOW TO USE THIS PAGE
+  1. Replace everything in [square brackets] with your own details.
+  2. Put your photos in a folder called "images" next to this file.
+  3. Edit the settings near the bottom of this file:
+       HERO        – the title image (ant at insect carrion)
+       STACKS      – slide show of focus-stacked ant images
+       TRAIT_IMAGE – ant with trait measurements
+       TRAITS      – list of traits shown next to it
+       BAITS       – baiting surveys (overview + close-up each)
+  4. Commit and push to your repository "yourusername.github.io".
+-->
+<style>
+  :root {
+    color-scheme: light;
+    /* --bg is replaced automatically by the soil colour of your title image
+       (see HERO.background below). This value is only the fallback. */
+    --bg: #E5D9B9;
+    --surface: color-mix(in srgb, var(--bg) 45%, #ffffff);
+    --stage: color-mix(in srgb, var(--bg) 25%, #ffffff);
+    --text: #2a2219;
+    --muted: #5c4f3f;
+    --accent: #285f67;
+    --accent-soft: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    --border: color-mix(in srgb, var(--bg) 78%, #5c4f3f);
+    --shadow: 0 1px 2px rgba(60,40,20,.08), 0 6px 20px rgba(60,40,20,.10);
+    --font: Tahoma, Verdana, "DejaVu Sans", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 var(--font);
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  h1, h2, h3 { font-family: var(--font); font-weight: bold; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Hero: title framed by the carrion image ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: clamp(440px, 72vh, 700px);
+    display: flex; align-items: center;
+  }
+  .hero-img {
+    position: absolute; top: 0; bottom: 0; height: 100%;
+    left: var(--shift, 0%); width: calc(100% - var(--shift, 0%));
+    object-fit: cover; object-position: var(--focus, 60% 50%);
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 32%, transparent 62%),
+      linear-gradient(0deg, var(--bg) 0%, transparent 22%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 60%, transparent) 0%, transparent 15%);
+  }
+  .hero-text { position: relative; z-index: 1; width: 100%; padding-top: 48px; padding-bottom: 48px; }
+  .hero-text > * { max-width: 520px; }
+  .eyebrow {
+    font-size: 13px; font-weight: bold; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
+  }
+  h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1.1; margin: 0 0 16px; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+  .links a {
+    display: inline-block; padding: 7px 14px; border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    border: 1px solid var(--border);
+    text-decoration: none; font-size: 14px;
+  }
+  .links a:hover { background: var(--surface); }
+
+ 
+
+  nav {
+    position: sticky; top: 0; z-index: 5;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; flex-wrap: wrap; gap: 6px 22px; padding-top: 12px; padding-bottom: 12px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  nav a:hover { color: var(--text); }
+
+  section { padding: 64px 0 8px; }
+  h2 { font-size: 28px; margin: 0 0 18px; }
+  .prose p { max-width: 700px; margin: 0 0 14px; }
+
+  /* ---------- Research layers ---------- */
+  .layer { padding-top: 48px; }
+  .layer-head { max-width: 720px; margin-bottom: 22px; }
+  .layer-num {
+    display: inline-block; font-size: 12px; font-weight: bold; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+  }
+  .layer h3 { font-size: 22px; margin: 0 0 8px; }
+  .layer-head p { margin: 0; }
+  .layer-head .related { margin-top: 10px; font-size: 14px; }
+  .bait-text .related { display: block; margin-top: 10px; font-size: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .ph {
+    width: 100%; height: 100%; min-height: 160px; display: grid; place-items: center;
+    color: var(--muted); font-size: 13px; text-align: center; padding: 12px;
+    background: var(--accent-soft);
+  }
+  .cap { padding: 12px 16px 14px; font-size: 14px; }
+  .cap .taxon { font-style: italic; font-weight: bold; }
+  .cap .sub { color: var(--muted); }
+
+  /* Slide show (flexible image sizes: each image is fitted, never cropped) */
+  .slideshow { position: relative; outline: none; }
+  .slideshow:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
+  .stage {
+    position: relative; height: clamp(280px, 62vh, 600px);
+    background: var(--stage); touch-action: pan-y;
+  }
+  .stage .slide {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: 16px; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+  }
+  .stage .slide.active { opacity: 1; pointer-events: auto; }
+  .stage .slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
+  .stage .slide .ph { max-width: 420px; max-height: 260px; border-radius: 10px; }
+  .ctrl {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 90%, transparent); color: var(--text);
+    font: 22px/1 var(--font); cursor: pointer; display: grid; place-items: center;
+  }
+  .ctrl:hover { background: var(--surface); }
+  .ctrl.prev { left: 12px; } .ctrl.next { right: 12px; }
+  .slide-foot { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .counter { color: var(--muted); font-size: 13px; padding: 12px 16px 0; white-space: nowrap; }
+  .dots { display: flex; justify-content: center; gap: 8px; padding: 0 0 14px; flex-wrap: wrap; }
+  .dots button {
+    width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
+    background: var(--border);
+  }
+  .dots button[aria-current="true"] { background: var(--accent); }
+
+  /* Traits */
+  .traits { display: grid; grid-template-columns: 3fr 2fr; gap: 24px; align-items: start; }
+  .trait-figure { position: relative; }
+  .trait-figure img { display: block; width: 100%; height: auto; }
+  .trait-figure .overlay { position: absolute; inset: 0; transition: opacity .3s ease; }
+  .trait-figure.hide-overlay .overlay { opacity: 0; }
+  .toggle {
+    font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text); margin: 0 16px 14px;
+  }
+  .toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .trait-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .trait-list li { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+  .trait-list strong { display: block; }
+  .trait-list span { color: var(--muted); font-size: 14px; }
+  .source-note { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+
+  /* Baits */
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .tabs button {
+    font: inherit; font-size: 14px; padding: 7px 16px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  }
+  .tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .bait-panel { display: grid; grid-template-columns: 3fr 2fr; gap: 18px; }
+  .bait-panel .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .bait-panel .card .ph { aspect-ratio: 4 / 3; }
+  .bait-text { max-width: 720px; margin: 16px 0 0; }
+
+  /* Publications */
+  .pubs { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 840px; }
+  .pubs li { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .pub-title { font-weight: bold; display: block; margin-bottom: 4px; }
+  .pub-meta { color: var(--muted); font-size: 14px; }
+  .tag {
+    display: inline-block; font-size: 12px; font-weight: bold; padding: 2px 8px;
+    border-radius: 6px; margin-right: 8px; vertical-align: 1px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .me { font-weight: bold; color: var(--text); }
+
+  .aside {
+    max-width: 700px; margin: 22px 0 0; padding: 10px 14px;
+    border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--surface) 60%, transparent);
+    color: var(--muted); font-size: 14px; border-radius: 0 8px 8px 0;
+  }
+
+  footer { padding: 64px 0 40px; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 760px) {
+    .traits, .bait-panel { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { display: block; min-height: 0; }
+    .hero-img { position: relative; left: 0; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+    .hero::after {
+      background: linear-gradient(0deg, var(--bg) 0%, transparent 35%);
+      bottom: auto; height: calc(100vw * 3 / 4);
+    }
+    .hero-text { padding-top: 8px; padding-bottom: 32px; }
+    .ctrl { width: 36px; height: 36px; font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 · Title framed by the carrion image -->
+<header class="hero">
+  <img class="hero-img" id="hero-img" alt="">
+  <div class="wrap hero-text">
+    <p class="eyebrow">Insect ecology · Biodiversity · Macro photography</p>
+    <h1>Joshua Spitz</h1>
+    <p class="lead">I study how environmental change shapes insect communities and the ecosystem functions they provide.</p>
+    <ul class="links">
+      <li><a href="#" id="mail-link">Email</a></li>
+      <li><a href="https://orcid.org/0009-0002-2374-3934">ORCID</a></li>
+      <li><a href="https://www.inaturalist.org/people/joshua_spitz">iNaturalist</a></li>
+      <!-- Remove any link you don't use -->
+    </ul>
+  </div>
+</header>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="about" class="prose">
+    <h2>About</h2>
+    <p>I am completing my PhD at Leuphana University of Lüneburg on ant communities <a href="https://bef-china.com/" target="_blank" rel="noopener">in a subtropical tree diversity experiment in SE China</a>, studying ant trophic interactions, diversity, as well as compositional and functional shifts across levels of tree species richness. Fieldwork included extensive litter surveys and the identification of ground-foraging and cryptic litter ants.</p>
+    <p>Before that, I studied at TU Munich, where I worked on wild bee–plant interaction data along a land-use gradient in the <a href="https://www.biodiversity-exploratories.de/en/" target="_blank" rel="noopener">Biodiversity Exploratories</a> and on honeybee foraging along an urbanization gradient.</p>
+    <p>I am interested in combining classical taxonomic expertise with novel techniques to elucidate the mechanisms behind changes in insect communities and their functions. I analyze data in R.</p>
+    <p class="aside">More of my insect photography, with identifications checked by the community, is on <a href="https://www.inaturalist.org/people/joshua_spitz" target="_blank" rel="noopener">iNaturalist ↗</a></p>
+  </section>
+
+  <section id="research">
+    <h2>Three layers of data</h2>
+    <div class="prose"><p>My work builds up from who is there, to what they are like, to what they do.</p></div>
+
+    <!-- 2 · Slide show: focus-stacked images / taxonomy -->
+    <div class="layer">
+      <div class="layer-head">
+        <span class="layer-num">Layer 1 · Taxonomy</span>
+        <h3>Who is there</h3>
+        <p>My research rests on classical taxonomic data: ants sampled in the field, sorted and identified to species level under the microscope. Focus-stacked images come close to the view under the microscope and show the characters that identification relies on.</p>
+      </div>
+      <div class="card slideshow" id="stacks" tabindex="0" aria-roledescription="carousel" aria-label="Focus-stacked ant images">
+        <div class="stage" id="stack-stage"></div>
+        <div class="slide-foot">
+          <div class="cap" id="stack-cap" aria-live="polite"></div>
+          <div class="counter" id="stack-counter"></div>
+        </div>
+        <div class="dots" id="stack-dots"></div>
+      </div>
+    </div>
+
+    <!-- 3 · Trait measurements -->
+    <div class="layer">
+      <div class="layer-head">
+        <span class="layer-num">Layer 2 · Traits</span>
+        <h3>What they are like</h3>
+        <p>Measuring morphological traits on identified specimens adds a functional layer. Traits link species to how they forage, what they eat and how they move through their habitat, and they reveal shifts in communities that species counts alone can miss.</p>
+        <p class="related">→ Related: <a href="https://doi.org/10.32942/X2S964" target="_blank" rel="noopener">Spitz et al. (2026), preprint</a></p>
+      </div>
+      <div class="traits">
+        <div class="card">
+          <div class="trait-figure" id="trait-figure"></div>
+          <div class="cap" id="trait-cap"></div>
+          <button class="toggle" id="trait-toggle" type="button" aria-pressed="true" hidden>Measurements shown</button>
+        </div>
+        <div>
+          <ul class="trait-list" id="trait-list"></ul>
+          <p class="source-note">Trait interpretation following <a href="https://doi.org/10.1111/1365-2656.13896" target="_blank" rel="noopener">Hoenle et al. (2023)</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Baiting surveys -->
+    <div class="layer">
+      <div class="layer-head">
+        <span class="layer-num">Layer 3 · Interactions &amp; functions</span>
+        <h3>What they do</h3>
+        <p>Baiting surveys capture ant behavior in the field: how quickly baits are removed, a direct measure of an ecosystem function, and which species use which resources, analyzed as interaction networks.</p>
+        <p class="related">→ Related: <a href="https://doi.org/10.32942/X2WX00" target="_blank" rel="noopener">Spitz et al. (2026), preprint</a></p>
+      </div>
+      <div class="tabs" id="bait-tabs" role="tablist" aria-label="Baiting surveys"></div>
+      <div id="bait-panel"></div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="pubs">
+      <li>
+        <span class="tag">Preprint</span>
+        <span class="pub-title">Canopy closure re-establishes ants in young plantations, while low soil pH limits ant diversity</span>
+        <span class="pub-meta"><span class="me">Spitz, J.</span>, Boutaud, E., Fornoff, F., Seitz, S., Assmann, T., Liu, X., &amp; Staab, M. (2026). EcoEvoRxiv. Under review at <em>Insect Conservation and Diversity</em>. <a href="https://doi.org/10.32942/X2S964">doi:10.32942/X2S964</a></span>
+      </li>
+      <li>
+        <span class="tag">Preprint</span>
+        <span class="pub-title">Trophic interactions of ants are robust to tree species loss</span>
+        <span class="pub-meta"><span class="me">Spitz, J.</span>, Langlotz, A., Lunow, J., Seitz, S., Deng, X., Liu, X., Feldhaar, H., &amp; Staab, M.(2026). EcoEvoRxiv. Under review at <em>Ecological Entomology</em>. <a href="https://doi.org/10.32942/X2WX00">doi:10.32942/X2WX00</a></span>
+      </li>
+      <li>
+        <span class="tag">Journal article</span>
+        <span class="pub-title">Moisture limits the diversity of nesting bees, wasps, and parasitoids in lying and standing deadwood.</span>
+        <span class="pub-meta">Martini, M., Dadda, M., Fornoff, F., Feldhaar, H., Luo, A., Rehling, F., <span class="me">Spitz, J.</span>, Staab, M., Thorn, S., Zhu, C., &amp; Klein, A.-M. (2026). <em>Basic and Applied Ecology</em>, 151865. <a href="https://doi.org/10.1016/j.baae.2026.151865">doi:10.1016/j.baae.2026.151865</a></span>
+      </li>
+      <li>
+        <span class="tag">Data paper</span>
+        <span class="pub-title">Data on visitation records from wild bees and plants along a land use gradient in Germany and Belgium: laboratory work and protocol description for barcoding</span>
+        <span class="pub-meta">Parreno, A., Werle, S., Buydens, L., <span class="me">Spitz, J.</span>, … Keller, A., &amp; Leonhardt, S. (2025). <em>Data in Brief</em>, 61, 111672. <a href="https://doi.org/10.1016/j.dib.2025.111672">doi:10.1016/j.dib.2025.111672</a></span>
+      </li>
+    </ul>
+  </section>
+
+
+</main>
+
+<footer class="wrap">
+  © 2026 Joshua Spitz. All photos are my own unless otherwise indicated; please ask before reuse.
+</footer>
+
+<script>
+/* =====================================================================
+   SETTINGS – edit these. All image files go into the "images" folder.
+   ===================================================================== */
+
+/* 1 · Title image (ant attending insect carrion)
+   shift:      moves the whole photo to the right, e.g. "15%". "0%" = no shift.
+               The left edge fades into the background, so no border shows.
+   focus:      which part of the photo stays visible when it is cropped
+               ("horizontal% vertical%"). Smaller first number = more of the
+               photo's left side; only has an effect when the sides are cropped.
+   background: a fixed colour such as "#E5D9B9", or "auto" to take the soil
+               colour from the edges of the photo (only works online). */
+const HERO = {
+  file: "IMG_20250721_112931.jpg",
+  alt: "Ant (Nylanderia sp.) attending insect carrion on the forest floor",
+  shift: "15%",
+  focus: "50% 50%",
+  background: "#E5D9B9"
+};
+
+/* 2 · Slide show of focus-stacked ant images (any size or shape)
+   Optional per image: taxon, view, note, credit (photographer, if not you),
+   link (web address, shown as "View on AntWeb ↗"), linkText (to change that wording).
+   Example: { file: "stack-1.jpg", taxon: "<i>Stigmatomma silvestrii</i>",
+              view: "lateral view", credit: "Name Surname" }, */
+const STACKS = [
+  { file: "Picture1 - Copy.jpg", link: "https://www.antweb.org/specimen.do?code=antweb1048548" },
+  { file: "Picture2 - Copy.jpg", link: "https://www.antweb.org/specimen.do?code=antweb1048550" },
+  { file: "Picture3 - Copy.jpg", link: "https://www.antweb.org/specimen.do?code=antweb1048549" }
+];
+
+/* 3 · Trait image
+   If your image already has the measurements drawn in: put it in "file"
+   and set overlay: null.
+   If you have the measurement lines as a separate transparent PNG of the
+   same size: put it in "overlay" – visitors can then switch it on/off. */
+const TRAIT_IMAGE = {
+  file: "Functional_traits.png",
+  overlay: null,
+  alt: "Ant worker with morphological trait measurements",
+  caption: "<i>Fisheropone sharpi</i>, exemplary traits shown as overlay."
+};
+
+/* Traits listed next to the image – replace with the traits you measured */
+const TRAITS = [
+  { name: "Mesosoma length (Weber's length)",        meaning: "Body size" },
+  { name: "Mandible length",       meaning: "Diet" },
+  { name: "Eye length",            meaning: "Foraging strategy and light conditions" },
+  { name: "Hind tibia length",     meaning: "Locomotion"}];
+
+/* 4 · Baiting surveys – each has an overview (bird's-eye view) and a
+   close-up. Delete one block if you want to show only one survey. */
+const BAITS = [
+  {
+    name: "Sausage baits",
+    overview: { file: "IMG_20260915_111515.jpg", caption: "Sausage bait laid out on the forest floor, with <i>Pheidole nodus</i> attending (minors and majors present)." },
+    closeup:  { file: "mmexport1789463864392.jpg",  caption: "<i>Pheidole</i> sp. of the <i>nodus</i> group attending a sausage bait."},
+    text: "As a surrogate for carrion, sausage baits can be used to record which ants find and exploit such resources, and how quickly they are removed – a measure of scavenging as an ecosystem function."
+  },
+  {
+    name: "Nutrient baits",
+    overview: { file: "baits.jpg", caption: "Set of nutrient baits." },
+    closeup:  { file: "IMG_20260907_124434.jpg",  caption: "Ant (<i>Aphaenogaster</i> sp.) at a nutrient bait." },
+    text: "Baits offering different nutrients (e.g. sugar, protein, salt) show which species use which resources. Species–resource links are analyzed as interaction networks."
+  }
+];
+
+
+/* ---------------------- No need to edit below ---------------------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const IMG = f => "images/" + encodeURI(f);
+const plain = s => String(s ?? "").replace(/<[^>]+>/g, "");   // text without tags, for alt texts
+
+/* Image with a friendly placeholder if the file is missing */
+function makeImg(file, alt, cls) {
+  const img = document.createElement("img");
+  img.alt = alt || "";
+  if (cls) img.className = cls;
+  img.addEventListener("error", () => {
+    const ph = document.createElement("div");
+    ph.className = "ph";
+    ph.textContent = "Add images/" + file;
+    img.replaceWith(ph);
+  }, { once: true });
+  img.src = IMG(file);
+  return img;
+}
+
+/* ---- 1 · Hero + background colour from the soil ---- */
+function setBg(r, g, b) {
+  const lum = (r, g, b) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  // keep the page light enough for dark text
+  for (let i = 0; i < 12 && lum(r, g, b) < 0.62; i++) {
+    r += (255 - r) * 0.12; g += (255 - g) * 0.12; b += (255 - b) * 0.12;
+  }
+  const c = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+  document.documentElement.style.setProperty("--bg", c);
+  document.querySelector('meta[name="theme-color"]').content = c;
+}
+function sampleEdges(img) {
+  try {
+    const w = 60, h = Math.max(1, Math.round(60 * img.naturalHeight / img.naturalWidth));
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+    const ctx = cv.getContext("2d"); ctx.drawImage(img, 0, 0, w, h);
+    const d = ctx.getImageData(0, 0, w, h).data, R = [], G = [], B = [];
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      if (x > 3 && x < w - 4 && y > 3 && y < h - 4) continue;   // edge pixels only
+      const i = (y * w + x) * 4; R.push(d[i]); G.push(d[i + 1]); B.push(d[i + 2]);
+    }
+    const med = a => a.sort((p, q) => p - q)[a.length >> 1];   // median ignores the ant
+    setBg(med(R), med(G), med(B));
+  } catch (e) { /* works once online; opened as a local file the fallback colour is used */ }
+}
+(function initHero() {
+  const img = $("hero-img");
+  img.alt = plain(HERO.alt);
+  img.style.setProperty("--focus", HERO.focus);
+  img.style.setProperty("--shift", HERO.shift || "0%");
+  if (HERO.background && HERO.background !== "auto") {
+    document.documentElement.style.setProperty("--bg", HERO.background);
+  } else {
+    img.addEventListener("load", () => sampleEdges(img), { once: true });
+  }
+  img.addEventListener("error", () => { img.style.display = "none"; }, { once: true });
+  img.src = IMG(HERO.file);
+})();
+
+/* ---- 2 · Slide show ---- */
+(function initStacks() {
+  const root = $("stacks"), stage = $("stack-stage"), cap = $("stack-cap"),
+        counter = $("stack-counter"), dots = $("stack-dots");
+  if (!STACKS.length) { root.closest(".layer").hidden = true; return; }
+  let cur = 0;
+  const slides = STACKS.map((s, i) => {
+    const div = document.createElement("div");
+    div.className = "slide";
+    div.setAttribute("role", "group");
+    div.setAttribute("aria-label", `${i + 1} of ${STACKS.length}`);
+    const img = makeImg(s.file, plain([s.taxon, s.view].filter(Boolean).join(", ")));
+    if (i > 0) img.loading = "lazy";
+    div.appendChild(img);
+    stage.appendChild(div);
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show image ${i + 1}`);
+    dot.addEventListener("click", () => show(i));
+    dots.appendChild(dot);
+    return div;
+  });
+  function show(n) {
+    cur = (n + STACKS.length) % STACKS.length;
+    slides.forEach((s, i) => s.classList.toggle("active", i === cur));
+    [...dots.children].forEach((d, i) => d.setAttribute("aria-current", i === cur ? "true" : "false"));
+    const s = STACKS[cur];
+        cap.innerHTML =
+      (s.taxon ? `<span class="taxon">${s.taxon}</span>` : "") +
+      (s.view ? ` <span class="sub">· ${s.view}</span>` : "") +
+      (s.note ? `<br>${s.note}` : "") +
+      (s.credit ? `<br><span class="sub">Photo: ${s.credit}</span>` : "") +
+      (s.link ? `${s.taxon || s.view || s.note || s.credit ? "<br>" : ""}<a href="${esc(s.link)}" target="_blank" rel="noopener">${s.linkText || "View on AntWeb"} ↗</a>` : "");
+  }
+  if (STACKS.length > 1) {
+    [["prev", "‹", -1], ["next", "›", 1]].forEach(([cls, sym, step]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "ctrl " + cls; b.textContent = sym;
+      b.setAttribute("aria-label", step < 0 ? "Previous image" : "Next image");
+      b.addEventListener("click", () => show(cur + step));
+      stage.appendChild(b);
+    });
+    root.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
+    let x0 = null;
+    stage.addEventListener("pointerdown", e => { x0 = e.clientX; });
+    stage.addEventListener("pointerup", e => {
+      if (x0 !== null && Math.abs(e.clientX - x0) > 40) show(cur + (e.clientX < x0 ? 1 : -1));
+      x0 = null;
+    });
+  } else {
+    dots.hidden = true; counter.hidden = true;
+  }
+  show(0);
+})();
+
+/* ---- 3 · Traits ---- */
+(function initTraits() {
+  const fig = $("trait-figure");
+  fig.appendChild(makeImg(TRAIT_IMAGE.file, plain(TRAIT_IMAGE.alt)));
+  $("trait-cap").innerHTML = TRAIT_IMAGE.caption || "";
+  if (TRAIT_IMAGE.overlay) {
+    const ov = makeImg(TRAIT_IMAGE.overlay, "Trait measurements", "overlay");
+    fig.appendChild(ov);
+    const t = $("trait-toggle");
+    t.hidden = false;
+    t.addEventListener("click", () => {
+      const on = t.getAttribute("aria-pressed") !== "true";
+      t.setAttribute("aria-pressed", on);
+      t.textContent = on ? "Measurements shown" : "Show measurements";
+      fig.classList.toggle("hide-overlay", !on);
+    });
+  }
+  $("trait-list").innerHTML = TRAITS.map(t =>
+    `<li><strong>${esc(t.name)}</strong><span>${esc(t.meaning)}</span></li>`).join("");
+})();
+
+/* ---- 4 · Baits ---- */
+(function initBaits() {
+  const tabs = $("bait-tabs"), panel = $("bait-panel");
+  if (!BAITS.length) { tabs.closest(".layer").hidden = true; return; }
+  function card(item) {
+    const c = document.createElement("figure");
+    c.className = "card"; c.style.margin = "0";
+    c.appendChild(makeImg(item.file, plain(item.caption)));
+    const fc = document.createElement("figcaption");
+    fc.className = "cap"; fc.innerHTML = item.caption || "";
+    c.appendChild(fc);
+    return c;
+  }
+  function show(i) {
+    [...tabs.children].forEach((b, j) => b.setAttribute("aria-selected", i === j ? "true" : "false"));
+    const b = BAITS[i];
+    panel.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.className = "bait-panel"; grid.setAttribute("role", "tabpanel");
+    grid.appendChild(card(b.overview));
+    grid.appendChild(card(b.closeup));
+    panel.appendChild(grid);
+    if (b.text) {
+      const p = document.createElement("p");
+      p.className = "bait-text"; p.innerHTML = b.text;
+      panel.appendChild(p);
+    }
+  }
+  BAITS.forEach((b, i) => {
+    const t = document.createElement("button");
+    t.type = "button"; t.setAttribute("role", "tab"); t.textContent = b.name;
+    t.addEventListener("click", () => show(i));
+    tabs.appendChild(t);
+  });
+  if (BAITS.length < 2) tabs.hidden = true;
+  show(0);
+})();
+
+  /* Email: first click reveals the address, second click opens the mail program.
+   The address never appears in full in the page code. */
+(function () {
+  const a = $("mail-link");
+  if (!a) return;
+  const parts = ["joshuaspitz.research", "gmail.com"];
+  a.addEventListener("click", e => {
+    if (a.dataset.shown) return;          // second click: normal mailto link
+    e.preventDefault();
+    const address = parts.join("@");
+    a.textContent = address;
+    a.href = "mailto:" + address;
+    a.title = "Click again to write an email";
+    a.dataset.shown = "true";
+  });
+})();
+</script>
+</body>
+</html>
